@@ -33,7 +33,7 @@ class createFile():
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
-            file = open(createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\entity\\"+createTableName+"Vo.java", 'w')
+            file = open(createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\entity\\"+createTableName+"Vo.java", 'w',encoding='utf-8')
             controllers = FileContent.createEntity(createCodeData, createTableName)
             file.write(controllers)
             file.close()
@@ -42,7 +42,7 @@ class createFile():
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
-            file = open(createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\controller\\"+createTableName+"Controller.java", 'w')
+            file = open(createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\controller\\"+createTableName+"Controller.java", 'w',encoding='utf-8')
             controllers = FileContent.createController(createCodeData, createTableName)
             file.write(controllers)
             file.close()
@@ -53,7 +53,7 @@ class createFile():
             os.mkdir(path)
             file = open(
                 createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\service\\" + createTableName + "Service.java",
-                'w')
+                'w',encoding='utf-8')
             controllers = FileContent.createService(createCodeData, createTableName)
             file.write(controllers)
             file.close()
@@ -64,7 +64,7 @@ class createFile():
             os.mkdir(path)
             file = open(
                 createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\service\\impl\\" +createTableName + "ServiceImpl.java",
-                'w')
+                'w',encoding='utf-8')
             controllers = FileContent.createServiceImpl(createCodeData, createTableName)
             file.write(controllers)
             file.close()
@@ -75,7 +75,7 @@ class createFile():
             os.mkdir(path)
             file = open(
                 createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\mapper\\" +createTableName+ "Mapper.java",
-                'w')
+                'w',encoding='utf-8')
             controllers = FileContent.createDaoMapper(createCodeData, createTableName)
             file.write(controllers)
             file.close()
@@ -90,7 +90,7 @@ class createFile():
             os.mkdir(path)
             file = open(
                 createCodeData.savePath + "\\CreateAllFileInThePath\\resources\\mybatis\\" +createTableName + "Mapper.xml",
-                'w')
+                'w',encoding='utf-8')
             controllers = FileContent.createDaoMapperXml(createCodeData, createTableName)
             file.write(controllers)
             file.close()

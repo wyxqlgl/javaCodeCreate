@@ -24,7 +24,7 @@ class getMysqlData:
     def getTableFiled(self,tableName):
         cursor=self.getConnection()
         tableName = str(tableName)
-        result={}
+        result=[]
         try:
             if tableName !='选择表' and tableName !='':
                 nPos=tableName.index("(")
@@ -36,8 +36,14 @@ class getMysqlData:
                 for row in fetchall:
                     name=row[0]
                     value=row[1]
+                    type=row[2]
                     if name!='':
-                        result[name]=value
+                        en={}
+                        en["columnName"]=name
+                        if value !='' and value is not None:
+                            en["columnComment"]=value
+                        en["type"]=type
+                        result.append(en)
         except Exception as e: #如果有错，输出错误信息，并回滚，回滚是一种错误处理机制
             cursor.rollback()
         finally:  #最后应该关闭所有的游标和连接
