@@ -27,8 +27,9 @@ class getMysqlData:
         result=[]
         try:
             if tableName !='选择表' and tableName !='':
-                nPos=tableName.index("(")
-                tableName=tableName[0:nPos]
+                if "(" in tableName:
+                    nPos=tableName.index("(")
+                    tableName=tableName[0:nPos]
                 sql="select COLUMN_NAME,COLUMN_COMMENT,DATA_TYPE from information_schema.COLUMNS where table_name = '"+tableName+"  ' and table_schema='"+self.dbbase+"'";
                 cur = cursor.cursor()
                 cur.execute(sql)

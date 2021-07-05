@@ -137,8 +137,10 @@ class createFileDataContent():
         return result
     def createDaoMapperXml(self,createCodeData,createTableName):
         connection = self.getConnectionData(createCodeData)
-        nPos=createCodeData.tableName.index("(")
-        tableName=createCodeData.tableName[0:nPos]
+        tableName=createCodeData.tableName
+        if "(" in tableName:
+            nPos=createCodeData.tableName.index("(")
+            tableName=createCodeData.tableName[0:nPos]
         result="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
         result=result+"<!DOCTYPE mapper PUBLIC \"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd\">\n"
         result=result+"<mapper namespace=\""+createCodeData.pathName+".mapper."+createTableName+"Mapper\">\n"
