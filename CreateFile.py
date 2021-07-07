@@ -6,6 +6,7 @@ from  CreateFileContent import createFileDataContent
 class createFile():
     def createFileByPath(self,createCodeData):
         FileContent = createFileDataContent()
+        isCreateFile = createCodeData.isCreateFile
         createTableName=self.dealTableName(createCodeData.tableName)
         if createCodeData is None:
             return
@@ -34,8 +35,9 @@ class createFile():
         if not folder:
             os.mkdir(path)
             file = open(createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\entity\\"+createTableName+"Vo.java", 'w',encoding='utf-8')
-            controllers = FileContent.createEntity(createCodeData, createTableName)
-            file.write(controllers)
+            if isCreateFile !=True:
+                controllers = FileContent.createEntity(createCodeData, createTableName)
+                file.write(controllers)
             file.close()
         #生成controller
         path = createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\controller"
@@ -54,8 +56,9 @@ class createFile():
             file = open(
                 createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\service\\" + createTableName + "Service.java",
                 'w',encoding='utf-8')
-            controllers = FileContent.createService(createCodeData, createTableName)
-            file.write(controllers)
+            if isCreateFile !=True:
+                controllers = FileContent.createService(createCodeData, createTableName)
+                file.write(controllers)
             file.close()
         #生成impl
         path = createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\service\\impl"
@@ -65,8 +68,9 @@ class createFile():
             file = open(
                 createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\service\\impl\\" +createTableName + "ServiceImpl.java",
                 'w',encoding='utf-8')
-            controllers = FileContent.createServiceImpl(createCodeData, createTableName)
-            file.write(controllers)
+            if isCreateFile !=True:
+                controllers = FileContent.createServiceImpl(createCodeData, createTableName)
+                file.write(controllers)
             file.close()
         #生成Mapper
         path = createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\mapper"
@@ -76,8 +80,9 @@ class createFile():
             file = open(
                 createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\mapper\\" +createTableName+ "Mapper.java",
                 'w',encoding='utf-8')
-            controllers = FileContent.createDaoMapper(createCodeData, createTableName)
-            file.write(controllers)
+            if isCreateFile !=True:
+                controllers = FileContent.createDaoMapper(createCodeData, createTableName)
+                file.write(controllers)
             file.close()
 
         path = createCodeData.savePath + "\\代码生成目录\\resources"
@@ -91,8 +96,9 @@ class createFile():
             file = open(
                 createCodeData.savePath + "\\代码生成目录\\resources\\mybatis\\" +createTableName + "Mapper.xml",
                 'w',encoding='utf-8')
-            controllers = FileContent.createDaoMapperXml(createCodeData, createTableName)
-            file.write(controllers)
+            if isCreateFile !=True:
+                controllers = FileContent.createDaoMapperXml(createCodeData, createTableName)
+                file.write(controllers)
             file.close()
     def dealTableName(self,tableName):
         tableName=tableName.strip()

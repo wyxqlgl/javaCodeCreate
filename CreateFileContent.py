@@ -6,6 +6,7 @@ from CreateCodeData import createCodeData
 class createFileDataContent():
     def  createController(self,createCodeData,createTableName):
         result="package "+createCodeData.pathName+".controller;\n"
+        oauther=createCodeData.oauther
         description = re.sub("[A-Za-z0-9\!\%\[\]\,\。\ ]", "", createCodeData.tableName).replace("_","").replace("(","").replace(")","")
         result=result+"import java.util.List;\n"
         result=result+"import org.springframework.web.bind.annotation.RestController;\n"
@@ -15,7 +16,7 @@ class createFileDataContent():
         result=result+"import org.springframework.beans.factory.annotation.Autowired;\n"
         result=result+"import org.springframework.web.bind.annotation.RequestMapping;\n"
         result=result+"/**\n"
-        result=result+"  * @author lgl\n"
+        result=result+"  * @author: "+oauther+"\n"
         result=result+"  * @Description "+description+"管理\n"
         result=result+"  * @Datetime "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" \n"
         result=result+"  * @Modified By \n"
@@ -25,7 +26,7 @@ class createFileDataContent():
         result=result+"public class "+createTableName+"Controller{\n"
         result=result+"        @Autowired\n"
         result=result+"        "+createTableName+"Service "+self.nameDeal(createTableName)+"Service;\n"
-        result=result+"/** \n    * TODO:  查询数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  查询数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"@ApiOperation(\"查询数据\")\n"
         result=result+"@ApiResponses(@ApiResponse(code = 200, message = \"处理成功\",response = "+createTableName+"Vo.class))\n"
         result=result+"@PostMapping(\"/get"+createTableName+"\")\n"
@@ -33,19 +34,19 @@ class createFileDataContent():
         result=result+"            Object "+self.nameDeal(createTableName)+"Vo="+self.nameDeal(createTableName)+"Service.get"+createTableName+"("+self.nameDeal(createTableName)+"Vo);\n"
         result=result+"            return "+self.nameDeal(createTableName)+"Vo;"
         result=result+"\n}\n\r"
-        result=result+"/** \n    * TODO:  添加数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  添加数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"@ApiOperation(\"添加数据\")\n"
         result=result+"@PostMapping(\"/add"+createTableName+"\")\n"
         result=result+"public void add"+createTableName+"(@RequestBody "+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) {\n"
         result=result+"            "+self.nameDeal(createTableName)+"Service.add"+createTableName+"("+self.nameDeal(createTableName)+"Vo);\n"
         result=result+"\n}\n\r"
-        result=result+"/** \n    * TODO:  修改数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  修改数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"@ApiOperation(\"修改数据\")\n"
         result=result+"@PostMapping(\"/update"+createTableName+"\")\n"
         result=result+"public void update"+createTableName+"(@RequestBody "+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) {\n"
         result=result+"            "+self.nameDeal(createTableName)+"Service.update"+createTableName+"("+self.nameDeal(createTableName)+"Vo);\n"
         result=result+"\n}\n\r"
-        result=result+"/** \n    * TODO:  删除数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  删除数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"@ApiOperation(\"删除数据\")\n"
         result=result+"@PostMapping(\"/del"+createTableName+"\")\n"
         result=result+"public void del"+createTableName+"( String  id) {\n"
@@ -54,58 +55,75 @@ class createFileDataContent():
         result=result+"}\n\r"
         return result
     def createService(self,createCodeData,createTableName):
+        oauther=createCodeData.oauther
         result="package "+createCodeData.pathName+".service;\n"
+        frame_work = createCodeData.frameWork
         description = re.sub("[A-Za-z0-9\!\%\[\]\,\。\ ]", "", createCodeData.tableName).replace("_","").replace("(","").replace(")","")
         result=result+"import java.util.List;\n"
+        result=result+"import "+createCodeData.pathName+".entity."+createTableName+"Vo;\n"
+        if frame_work:
+            result=result+"import com.baomidou.mybatisplus.extension.service.IService;\n"
         result=result+"/**\n"
-        result=result+"  * @author lgl\n"
+        result=result+"  * @author: "+oauther+"\n"
         result=result+"  * @Description "+description+"管理\n"
         result=result+"  * @Datetime "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" \n"
         result=result+"  * @Modified By \n"
         result=result+"  */\n"
-        result=result+"public interface "+createTableName+"Service{\n"
-        result=result+"/** \n    * TODO:  查询数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        if frame_work:
+            result=result+"public interface "+createTableName+"Service extends IService<"+createTableName+"Vo>{\n"
+        else:
+            result=result+"public interface "+createTableName+"Service{\n"
+        result=result+"  /** \n    * TODO:  查询数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"public Object get"+createTableName+"("+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) ;\n"
-        result=result+"/** \n    * TODO:  添加数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  添加数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"public void add"+createTableName+"("+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo);\n"
-        result=result+"/** \n    * TODO:  修改数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  修改数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"public void update"+createTableName+"( "+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) ;\n"
-        result=result+"/** \n    * TODO:  删除数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  删除数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"public void del"+createTableName+"( String  id) ;\n"
         result=result+"}\n\r"
         return result
     def createServiceImpl(self,createCodeData,createTableName):
+        oauther=createCodeData.oauther
+        frame_work = createCodeData.frameWork
         result="package "+createCodeData.pathName+".service.impl;\n"
         description = re.sub("[A-Za-z0-9\!\%\[\]\,\。\ ]", "", createCodeData.tableName).replace("_","").replace("(","").replace(")","")
         result=result+"import java.util.List;\n"
         result=result+"import org.springframework.stereotype.Service;\n"
+        result=result+"import "+createCodeData.pathName+".mapper."+createTableName+"Mapper;\n"
+        result=result+"import "+createCodeData.pathName+".entity."+createTableName+"Vo;\n"
+        if frame_work:
+            result=result+"import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;\n"
         result=result+"/**\n"
-        result=result+"  * @author lgl\n"
+        result=result+"  * @author: "+oauther+"\n"
         result=result+"  * @Description "+description+"管理\n"
         result=result+"  * @Datetime "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" \n"
         result=result+"  * @Modified By \n"
         result=result+"  */\n"
         result=result+"@Service \n"
-        result=result+"public class "+createTableName+"ServiceImpl  implements "+createTableName+"Service{\n"
+        if frame_work:
+            result=result+"public class "+createTableName+"ServiceImpl extends ServiceImpl<"+createTableName+"Mapper,"+createTableName+"Vo>  implements "+createTableName+"Service{\n"
+        else:
+            result=result+"public class "+createTableName+"ServiceImpl  implements "+createTableName+"Service{\n"
         result=result+"        @Autowired\n"
         result=result+"        "+createTableName+"Mapper "+self.nameDeal(createTableName)+"Mapper;\n"
-        result=result+"    /** \n    * TODO:  查询数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  查询数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"    @Override\n"
         result=result+"    public Object get"+createTableName+"("+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) {\n"
         result=result+"           Object "+self.nameDeal(createTableName)+"Vo="+self.nameDeal(createTableName)+"Mapper.get"+createTableName+"("+self.nameDeal(createTableName)+"Vo);\n"
         result=result+"           return "+self.nameDeal(createTableName)+"Vo;"
         result=result+"\n    }\n\r"
-        result=result+"     /** \n    * TODO:  添加数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"   /** \n    * TODO:  添加数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"    @Override\n"
         result=result+"    public void add"+createTableName+"( "+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) {\n"
         result=result+"           "+self.nameDeal(createTableName)+"Mapper.add"+createTableName+"("+self.nameDeal(createTableName)+"Vo);\n"
         result=result+"\n    }\n\r"
-        result=result+"    /** \n    * TODO:  修改数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  修改数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"    @Override\n"
         result=result+"    public void update"+createTableName+"( "+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) {\n"
         result=result+"           "+self.nameDeal(createTableName)+"Mapper.update"+createTableName+"("+self.nameDeal(createTableName)+"Vo);\n"
         result=result+"\n    }\n\r"
-        result=result+"    /** \n    * TODO:  删除数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  删除数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"    @Override\n"
         result=result+"    public void del"+createTableName+"( String  id) {\n"
         result=result+"           "+self.nameDeal(createTableName)+"Mapper.del"+createTableName+"(id);\n"
@@ -113,25 +131,26 @@ class createFileDataContent():
         result=result+"}\n\r"
         return result
     def createDaoMapper(self,createCodeData,createTableName):
+        oauther=createCodeData.oauther
         result="package "+createCodeData.pathName+".mapper;\n"
         description = re.sub("[A-Za-z0-9\!\%\[\]\,\。\ ]", "", createCodeData.tableName).replace("_","").replace("(","").replace(")","")
         result=result+"import java.util.List;\n"
         result=result+"import org.apache.ibatis.annotations.Mapper;\n"
         result=result+"/**\n"
-        result=result+"  * @author lgl\n"
+        result=result+"  * @author: "+oauther+"\n"
         result=result+"  * @Description "+description+"管理\n"
         result=result+"  * @Datetime "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" \n"
         result=result+"  * @Modified By \n"
         result=result+"  */\n"
         result=result+"@Mapper\n"
         result=result+"public interface "+createTableName+"Mapper{\n"
-        result=result+"/** \n    * TODO:  查询数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  查询数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"public Object get"+createTableName+"("+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) ;\n"
-        result=result+"/** \n    * TODO:  添加数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  添加数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"public void add"+createTableName+"("+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo);\n"
-        result=result+"/** \n    * TODO:  修改数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  修改数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"public void update"+createTableName+"( "+createTableName+"Vo "+self.nameDeal(createTableName)+"Vo) ;\n"
-        result=result+"/** \n    * TODO:  删除数据 \n    * @Param:\n    * @Author: lgl\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
+        result=result+"  /** \n    * TODO:  删除数据 \n    * @Param:\n    * @author: "+oauther+"\n    * @Date "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+"\n    */\n"
         result=result+"public void del"+createTableName+"( String  id) ;\n"
         result=result+"}\n\r"
         return result
@@ -182,15 +201,17 @@ class createFileDataContent():
         return result
     def createEntity(self,createCodeData,createTableName):
         connection = self.getConnectionData(createCodeData)
-
+        islombok = createCodeData.lombok
         description = re.sub("[A-Za-z0-9\!\%\[\]\,\。\ ]", "", createCodeData.tableName).replace("_","").replace("(","").replace(")","")
-
+        oauther=createCodeData.oauther
         result="/**\n"
-        result=result+"  * @author lgl\n"
+        result=result+"  * @author: "+oauther+"\n"
         result=result+"  * @Description "+description+"封装类\n"
         result=result+"  * @Datetime "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" \n"
         result=result+"  * @Modified By \n"
         result=result+"  */\n"
+        if islombok:
+            result=result+"@Data\n"
         result=result+"public class "+createTableName+"Vo   implements Serializable{\n"
         for var in connection:
             columnName=   var.get("columnName")
@@ -199,24 +220,25 @@ class createFileDataContent():
             filed = self.dealFiled(columnName)
             deal_type = self.dealType(type)
             if columnComment is not None and columnComment !='' :
-                result=result+"       /** \n       * "+ columnComment +"\n       */\n"
+                result=result+"     /** \n       * "+ columnComment +"\n       */\n"
                 result=result+"       @ApiModelProperty(value = \""+ columnComment +"\",required = true)\n"
             else:
                 result=result+"       @ApiModelProperty(value = \""+ filed +"\",required = true)\n"
             result=result+"       private "+deal_type+" "+filed+";\n\r";
         type=set()
-        for var in connection:
-            columnName=   var.get("columnName")
-            filed = self.dealFiled(columnName)
-            filedName = self.dealFiledName(columnName)
-            deal_type = self.dealType(var.get("type"))
-            type.add(deal_type)
-            result=result+"       public "+deal_type+" get"+filedName+"(){\n";
-            result=result+"           return "+filed+";\n";
-            result=result+"       }\n";
-            result=result+"       public "+deal_type+" set"+filedName+"(){\n";
-            result=result+"             return this."+filed+"="+filed+";\n";
-            result=result+"       }\n";
+        if islombok !=True:
+            for var in connection:
+                columnName=   var.get("columnName")
+                filed = self.dealFiled(columnName)
+                filedName = self.dealFiledName(columnName)
+                deal_type = self.dealType(var.get("type"))
+                type.add(deal_type)
+                result=result+"       public "+deal_type+" get"+filedName+"(){\n";
+                result=result+"           return "+filed+";\n";
+                result=result+"       }\n";
+                result=result+"       public "+deal_type+" set"+filedName+"(){\n";
+                result=result+"             return this."+filed+"="+filed+";\n";
+                result=result+"       }\n";
         result=result+"}\n\r"
         title="package "+createCodeData.pathName+".entity;\n"
         title=title+"import java.io.Serializable;\n"
@@ -229,6 +251,8 @@ class createFileDataContent():
             if var=="Date":
                 title=title+"import java.util.Date;\n"
         title=title+"import java.io.Serializable;\n"
+        if islombok:
+            title=title+"import lombok.Data;\n\r"
         return title+result
     def nameDeal(self,name):
         name = name[0].lower()+name[1:]
