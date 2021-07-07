@@ -118,7 +118,7 @@
      <item row="3" column="0">
       <widget class="QLineEdit" name="lineEdit">
        <property name="cursor">
-        <cursorShape>SizeVerCursor</cursorShape>
+        <cursorShape>IBeamCursor</cursorShape>
        </property>
        <property name="placeholderText">
         <string>开发代码人</string>

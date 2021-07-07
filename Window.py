@@ -53,7 +53,7 @@ class Ui_MainWindow(object):
         self.comboBox_2.addItem("")
         self.gridLayout.addWidget(self.comboBox_2, 1, 0, 1, 1)
         self.lineEdit = QtWidgets.QLineEdit(self.layoutWidget)
-        self.lineEdit.setCursor(QtGui.QCursor(QtCore.Qt.SizeVerCursor))
+        self.lineEdit.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
         self.lineEdit.setObjectName("lineEdit")
         self.gridLayout.addWidget(self.lineEdit, 3, 0, 1, 1)
         self.toolButton = QtWidgets.QToolButton(self.centralwidget)
