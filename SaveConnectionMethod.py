@@ -11,6 +11,8 @@ class saveConnectionMethod():
         self.getDirPath = getDirFilePath(None)
         window.buttonBox.clicked.connect(lambda: self.saveConnection(window, mainWind))
     def saveConnection(self, window, mainWind):
+
+        print(window.buttonBox.OK)
         self.ip = window.lineEdit.text()  # ip
         self.port = window.lineEdit_2.text()  # 端口号
         self.userName = window.lineEdit_3.text()  # 用户名

@@ -1,5 +1,4 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QHeaderView, QAbstractItemView
-from qtpy import QtCore
 import sys
 from Method import method
 from SaveConnection import SqlMain
