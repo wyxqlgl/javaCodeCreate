@@ -13,12 +13,12 @@ class createFile():
         pageName="main\\java\\"+createCodeData.pathName
         pageName=pageName.replace(".","\\")
         #生成总目录
-        path=createCodeData.savePath+"\\CreateAllFileInThePath"
+        path=createCodeData.savePath+"\\代码生成目录"
         folder = os.path.exists(path)
         if not folder :
             os.mkdir(path)
 
-        path=createCodeData.savePath+"\\CreateAllFileInThePath\\"+pageName
+        path=createCodeData.savePath+"\\代码生成目录\\"+pageName
         split = path.split("\\", -1)
         allPath=""
         for paths in split:
@@ -29,67 +29,67 @@ class createFile():
             folder = os.path.exists(allPath)
             if not folder :
                 os.mkdir(allPath)
-        path = createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\entity"
+        path = createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\entity"
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
-            file = open(createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\entity\\"+createTableName+"Vo.java", 'w',encoding='utf-8')
+            file = open(createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\entity\\"+createTableName+"Vo.java", 'w',encoding='utf-8')
             controllers = FileContent.createEntity(createCodeData, createTableName)
             file.write(controllers)
             file.close()
         #生成controller
-        path = createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\controller"
+        path = createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\controller"
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
-            file = open(createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\controller\\"+createTableName+"Controller.java", 'w',encoding='utf-8')
+            file = open(createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\controller\\"+createTableName+"Controller.java", 'w',encoding='utf-8')
             controllers = FileContent.createController(createCodeData, createTableName)
             file.write(controllers)
             file.close()
         #生成service
-        path = createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\service"
+        path = createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\service"
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
             file = open(
-                createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\service\\" + createTableName + "Service.java",
+                createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\service\\" + createTableName + "Service.java",
                 'w',encoding='utf-8')
             controllers = FileContent.createService(createCodeData, createTableName)
             file.write(controllers)
             file.close()
         #生成impl
-        path = createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\service\\impl"
+        path = createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\service\\impl"
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
             file = open(
-                createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\service\\impl\\" +createTableName + "ServiceImpl.java",
+                createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\service\\impl\\" +createTableName + "ServiceImpl.java",
                 'w',encoding='utf-8')
             controllers = FileContent.createServiceImpl(createCodeData, createTableName)
             file.write(controllers)
             file.close()
         #生成Mapper
-        path = createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\mapper"
+        path = createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\mapper"
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
             file = open(
-                createCodeData.savePath + "\\CreateAllFileInThePath\\"+pageName+"\\mapper\\" +createTableName+ "Mapper.java",
+                createCodeData.savePath + "\\代码生成目录\\"+pageName+"\\mapper\\" +createTableName+ "Mapper.java",
                 'w',encoding='utf-8')
             controllers = FileContent.createDaoMapper(createCodeData, createTableName)
             file.write(controllers)
             file.close()
 
-        path = createCodeData.savePath + "\\CreateAllFileInThePath\\resources"
+        path = createCodeData.savePath + "\\代码生成目录\\resources"
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
-        path = createCodeData.savePath + "\\CreateAllFileInThePath\\resources\\mybatis"
+        path = createCodeData.savePath + "\\代码生成目录\\resources\\mybatis"
         folder = os.path.exists(path)
         if not folder:
             os.mkdir(path)
             file = open(
-                createCodeData.savePath + "\\CreateAllFileInThePath\\resources\\mybatis\\" +createTableName + "Mapper.xml",
+                createCodeData.savePath + "\\代码生成目录\\resources\\mybatis\\" +createTableName + "Mapper.xml",
                 'w',encoding='utf-8')
             controllers = FileContent.createDaoMapperXml(createCodeData, createTableName)
             file.write(controllers)

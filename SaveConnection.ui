@@ -152,18 +152,34 @@
  <resources/>
  <connections>
   <connection>
+   <sender>toolButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>101</x>
+     <y>250</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>154</x>
+     <y>248</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>toolButton_2</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>217</x>
-     <y>354</y>
+     <x>219</x>
+     <y>248</y>
     </hint>
     <hint type="destinationlabel">
-     <x>301</x>
-     <y>358</y>
+     <x>264</x>
+     <y>250</y>
     </hint>
    </hints>
   </connection>

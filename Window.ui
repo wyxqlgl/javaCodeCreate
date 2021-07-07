@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>396</width>
-    <height>311</height>
+    <width>394</width>
+    <height>283</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QCheckBox" name="checkBox_2">
     <property name="geometry">
      <rect>
-      <x>151</x>
-      <y>214</y>
+      <x>160</x>
+      <y>200</y>
       <width>47</width>
       <height>16</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QCheckBox" name="checkBox_3">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>214</y>
+      <x>10</x>
+      <y>200</y>
       <width>89</width>
       <height>16</height>
      </rect>
@@ -43,8 +43,8 @@
    <widget class="QCheckBox" name="checkBox_4">
     <property name="geometry">
      <rect>
-      <x>104</x>
-      <y>214</y>
+      <x>110</x>
+      <y>200</y>
       <width>41</width>
       <height>16</height>
      </rect>
@@ -56,8 +56,8 @@
    <widget class="QCheckBox" name="checkBox_5">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>210</y>
+      <x>300</x>
+      <y>200</y>
       <width>83</width>
       <height>16</height>
      </rect>
@@ -70,7 +70,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>210</y>
+      <y>200</y>
       <width>59</width>
       <height>16</height>
      </rect>
@@ -79,47 +79,13 @@
      <string>lombok</string>
     </property>
    </widget>
-   <widget class="QDialogButtonBox" name="buttonBox">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>240</y>
-      <width>156</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="sizeIncrement">
-     <size>
-      <width>0</width>
-      <height>0</height>
-     </size>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
-    </property>
-    <property name="standardButtons">
-     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
-    </property>
-    <property name="centerButtons">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>9</x>
-      <y>9</y>
+      <x>10</x>
+      <y>0</y>
       <width>381</width>
-      <height>191</height>
+      <height>181</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -164,13 +130,39 @@
      </item>
     </layout>
    </widget>
+   <widget class="QToolButton" name="toolButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>230</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>生成</string>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_2">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>230</y>
+      <width>61</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>取消</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>396</width>
+     <width>394</width>
      <height>23</height>
     </rect>
    </property>
@@ -191,7 +183,6 @@
    </widget>
    <addaction name="menu"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionmysql">
    <property name="text">
     <string>mysql</string>
@@ -216,18 +207,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
-   <signal>clicked(QAbstractButton*)</signal>
+   <sender>toolButton_2</sender>
+   <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>148</x>
-     <y>383</y>
+     <x>231</x>
+     <y>264</y>
     </hint>
     <hint type="destinationlabel">
-     <x>547</x>
-     <y>521</y>
+     <x>331</x>
+     <y>248</y>
     </hint>
    </hints>
   </connection>
